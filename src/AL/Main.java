@@ -7,6 +7,29 @@ public class Main {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         ArrayList<Integer> list = new ArrayList<>();
+        testDriver(scn, list);
+    }
+
+    /**
+     * menu Prints a menu of choices for the user to select for interacting with an ArrayList object.
+     */
+    public static void menu() {
+        System.out.print("Methods for ArrayList\n1 - ADD - Adds an element into the ArrayList\n2 - CONTAINS - " +
+                "Checks if an element is contained in the ArrayList\n3 - REMOVE - Removes an element from the " +
+                "ArrayList\n4 - GET - retrieves an element at a specified index\n5 - IS EMPTY - Checks if the " +
+                "ArrayList is empty\n6 - IS FULL - Checks if the ArrayList is full\n7 - SIZE - Retrieves the number" +
+                " of elements in the ArrayList\n8 - CLEAR - Clears the ArrayList of all elements\n9 - INDEX OF - " +
+                "Retrieves the first index of an element, if present\n10 - LAST INDEX OF - Retrieves the last " +
+                "index of an element, if present\n11 - SET - Sets an index to a value\n12 - TO STRING - Returns a " +
+                "String of the elements in the ArrayList\nX - Terminate\n\nEnter choice: ");
+    }
+
+    /**
+     * testDriver A test driver method for interacting with an ArrayList object.
+     * @param scn A Scanner object for user input.
+     * @param list An ArrayList object.
+     */
+    public static void testDriver(Scanner scn, ArrayListInterface<Integer> list) {
         String choice = "";
         while(!choice.equalsIgnoreCase("X")) {
             menu();
@@ -67,19 +90,5 @@ public class Main {
                 System.out.println("Invalid choice");
             }
         }
-    }
-
-    /**
-     * menu Prints a menu of choices for the user to select for interacting with an ArrayList object.
-     */
-    public static void menu() {
-        System.out.print("Methods for ArrayList\n1 - ADD - Adds an element into the ArrayList\n2 - CONTAINS - " +
-                "Checks if an element is contained in the ArrayList\n3 - REMOVE - Removes an element from the " +
-                "ArrayList\n4 - GET - retrieves an element at a specified index\n5 - IS EMPTY - Checks if the " +
-                "ArrayList is empty\n6 - IS FULL - Checks if the ArrayList is full\n7 - SIZE - Retrieves the number" +
-                " of elements in the ArrayList\n8 - CLEAR - Clears the ArrayList of all elements\n9 - INDEX OF - " +
-                "Retrieves the first index of an element, if present\n10 - LAST INDEX OF - Retrieves the last " +
-                "index of an element, if present\n11 - SET - Sets an index to a value\n12 - TO STRING - Returns a " +
-                "String of the elements in the ArrayList\nX - Terminate\n\nEnter choice: ");
     }
 }
