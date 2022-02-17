@@ -8,6 +8,7 @@ public class Main {
         Scanner scn = new Scanner(System.in);
         ArrayList<Integer> list = new ArrayList<>();
         testDriver(scn, list);
+        scn.close();
     }
 
     /**
