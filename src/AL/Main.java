@@ -21,8 +21,9 @@ public class Main {
                 "ArrayList is empty\n6 - IS FULL - Checks if the ArrayList is full\n7 - SIZE - Retrieves the number" +
                 " of elements in the ArrayList\n8 - CLEAR - Clears the ArrayList of all elements\n9 - INDEX OF - " +
                 "Retrieves the first index of an element, if present\n10 - LAST INDEX OF - Retrieves the last " +
-                "index of an element, if present\n11 - SET - Sets an index to a value\n12 - TO STRING - Returns a " +
-                "String of the elements in the ArrayList\nX - Terminate\n\nEnter choice: ");
+                "index of an element, if present\n11 - SET - Sets an index to a value\n12 - GET CAPACITY - Returns " +
+                "the current capacity of the ArrayList\n13 - TO STRING - Returns a String of the elements in the " +
+                "ArrayList\nX - Terminate\n\nEnter choice: ");
     }
 
     /**
@@ -39,7 +40,8 @@ public class Main {
                 System.out.print("Enter an integer element to add in the ArrayList: ");
                 int input = scn.nextInt();
                 scn.nextLine();
-                System.out.println(input + " added: " + list.add(input));
+                list.add(input);
+                System.out.println(input + " added.");
             } else if(choice.equals("2")) {
                 System.out.print("Enter an integer to search that element in the ArrayList: ");
                 int input = scn.nextInt();
@@ -83,6 +85,8 @@ public class Main {
                 scn.nextLine();
                 System.out.println("Index/value set: " + list.set(index, value));
             } else if(choice.equals("12")) {
+                System.out.println("Current capacity: " + list.getCapacity());
+            } else if(choice.equals("13")) {
                 String result = list.toString();
                 System.out.println("String representation of ArrayList elements:\n" + list.toString());
             } else if(choice.equalsIgnoreCase("X")) {
