@@ -1,8 +1,7 @@
 package AL;
 
-public interface ArrayListInterface<T>
-{
-    boolean add(T t);
+public interface ArrayListInterface<T> {
+    void add(T t);
     boolean contains(T t);
     boolean remove(T t);
     T get(int index);
@@ -13,5 +12,6 @@ public interface ArrayListInterface<T>
     int indexOf(T t);
     int lastIndexOf(T t);
     boolean set(int index, T t);
+    int getCapacity();
     String toString();
 }
