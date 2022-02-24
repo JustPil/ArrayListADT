@@ -7,6 +7,7 @@ public class ArrayList<T> implements ArrayListInterface<T> {
     private int numElements = 0;
     private T[] array;
     private final double LOAD_THRESHOLD = .75;
+    private final int ELEMENT_NOT_FOUND = -1;
     private Comparator<T> comp;
 
     /**
@@ -41,25 +42,12 @@ public class ArrayList<T> implements ArrayListInterface<T> {
     /**
      * add Adds a new element to the ArrayList, resizing the internal array if load threshold is reached.
      * @param t The element to add.
-     * @return True if addition is successful, false otherwise.
      */
-    public boolean add(T t) {
+    public void add(T t) {
+        array[numElements++] = t;
         if((double)(numElements / capacity) >= LOAD_THRESHOLD) {
             resize();
         }
-        if(array[numElements] == null) {
-            array[numElements++] = t;
-            return true;
-        } else {
-            for(int i = 0; i < array.length; i++) {
-                if(array[i] == null) {
-                    array[i] = t;
-                    numElements++;
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     /**
@@ -69,7 +57,10 @@ public class ArrayList<T> implements ArrayListInterface<T> {
      */
     public boolean contains(T t) {
         for(T value : array) {
-            if(value != null && comp.compare(value, t) == 0) {
+            if(value == null) {
+                break;
+            }
+            if(comp.compare(value, t) == 0) {
                 return true;
             }
         }
@@ -82,8 +73,11 @@ public class ArrayList<T> implements ArrayListInterface<T> {
      * @return True is removal is successful, false otherwise.
      */
     public boolean remove(T t) {
-        for(int i = 0; i < array.length; i++) {
-            if(array[i] != null && comp.compare(array[i], t) == 0) {
+        for(int i = 0; i < numElements; i++) {
+            if(array[i] == null) {
+                break;
+            }
+            if(comp.compare(array[i], t) == 0) {
                 array[i] = null;
                 numElements--;
                 shift(i);
@@ -98,10 +92,12 @@ public class ArrayList<T> implements ArrayListInterface<T> {
      * @param index The index of a deleted element, whereby shifting begins.
      */
     private void shift(int index) {
-        for(int i = index; i < array.length - 1; i++) {
+        for(int i = index; i < array.length - 2; i++) {
+            if(array[i] == null) {
+                break;
+            }
             array[i] = array[i + 1];
         }
-        array[array.length - 1] = null;
     }
 
     /**
@@ -155,11 +151,14 @@ public class ArrayList<T> implements ArrayListInterface<T> {
      */
     public int indexOf(T t) {
         for(int i = 0; i < numElements; i++) {
-            if(array[i] != null && comp.compare(array[i], t) == 0) {
+            if(array[i] == null) {
+                break;
+            }
+            if(comp.compare(array[i], t) == 0) {
                 return i;
             }
         }
-        return -1;
+        return ELEMENT_NOT_FOUND;
     }
 
     /**
@@ -169,11 +168,14 @@ public class ArrayList<T> implements ArrayListInterface<T> {
      */
     public int lastIndexOf(T t) {
         for(int i = array.length - 1; i >= 0; i--) {
-            if(array[i] != null && comp.compare(array[i], t) == 0) {
+            if(array[i] == null) {
+                break;
+            }
+            if(comp.compare(array[i], t) == 0) {
                 return i;
             }
         }
-        return -1;
+        return ELEMENT_NOT_FOUND;
     }
 
     /**
@@ -183,11 +185,19 @@ public class ArrayList<T> implements ArrayListInterface<T> {
      * @return True if the set was successful, false otherwise.
      */
     public boolean set(int index, T t) {
-        if(index < 0 || index >= array.length) {
+        if(index < 0 || index >= numElements) {
             return false;
         }
         array[index] = t;
         return true;
+    }
+
+    /**
+     * getCapacity Returns the ArrayList's current capacity.
+     * @return The capacity of the ArrayList.
+     */
+    public int getCapacity() {
+        return capacity;
     }
 
     /**
